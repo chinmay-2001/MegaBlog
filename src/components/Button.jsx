@@ -2,6 +2,7 @@ import React from "react";
 
 function Button({
   children,
+  name = "",
   type = "button",
   bgcolor = "bg-blue-600",
   textColor = "text-white",
@@ -12,7 +13,9 @@ function Button({
     <button
       className={`px-4 py-2 rounded-lg ${bgcolor} ${textColor} ${className}`}
       {...props}
-    ></button>
+    >
+      {children}
+    </button>
   );
 }
 

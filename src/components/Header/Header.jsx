@@ -6,10 +6,9 @@ import { useSelector } from "react-redux";
 
 function Header() {
   const authStatus = useSelector((state) => {
-    console.log(state);
-    return false;
+    return state.auth.status;
   });
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const navItems = [
     {
       name: "Home",
@@ -43,21 +42,28 @@ function Header() {
       <Container>
         <nav className="flex">
           <div className="mr-4">
-            {/* <Link>
-              <Logo width="70px"></Logo>
-            </Link> */}
+            <Link to="/">
+              <Logo width="70px" />
+            </Link>
           </div>
           <ul className="flex ml-auto">
-            {navItems.map((item) => {
-              item.authStatus && (
+            {navItems.map((item) =>
+              item.active ? (
                 <li key={item.name}>
-                  {/* <button onClick={() => navigate(item.slug)}>
+                  <button
+                    onClick={() => navigate(item.slug)}
+                    className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
+                  >
                     {item.name}
-                  </button> */}
+                  </button>
                 </li>
-              );
-            })}
-            {authStatus && <li>LogoutBtn</li>}
+              ) : null
+            )}
+            {authStatus && (
+              <li>
+                <LogoutBtn />
+              </li>
+            )}
           </ul>
         </nav>
       </Container>

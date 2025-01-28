@@ -6,7 +6,6 @@ export class AuthServie {
   client = new Client();
   account;
   constructor() {
-    console.log("here", conf.appwriteProjectId, conf.appwriteUrl);
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
@@ -33,7 +32,7 @@ export class AuthServie {
 
   async login({ email, password }) {
     try {
-      return await this.account.createEmailSession(email, password);
+      return await this.account.createEmailPasswordSession(email, password);
     } catch (error) {
       console.log("appWrite error: ", error);
     }

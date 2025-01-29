@@ -30,7 +30,7 @@ export default function PostForm({ post }) {
 
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
-        featureImage: file ? file.$id : undefined,
+        featuredImage: file ? file.$id : undefined,
       });
 
       if (dbPost) {
@@ -40,7 +40,8 @@ export default function PostForm({ post }) {
       const file = await appwriteService.uploadFile(data.image[0]);
       if (file) {
         const fileId = file.$id;
-        data.featureImage = fileId;
+        data.featuredImage = fileId;
+        console.log(data);
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
@@ -57,7 +58,7 @@ export default function PostForm({ post }) {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
     }
     return "";
@@ -127,7 +128,7 @@ export default function PostForm({ post }) {
           />
           <Button
             type="submit"
-            bgcolor={post ? "bg-green-500" : undefined}
+            bgColor={post ? "bg-green-500" : undefined}
             className="w-full"
           >
             {post ? "Update" : "Submit"}

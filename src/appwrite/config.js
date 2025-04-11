@@ -17,7 +17,6 @@ export class Service {
 
   async createPost({ title, slug, content, featuredImage, status, userId }) {
     try {
-      console.log(slug);
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
@@ -76,7 +75,6 @@ export class Service {
 
   async getPosts(queries = [Query.equal("status", "active")]) {
     try {
-      console.log(queries);
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
@@ -109,7 +107,6 @@ export class Service {
   }
 
   getFilePreview(fileId) {
-    console.log("fileId:", fileId, conf.appwriteBucketId);
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
   }
 }

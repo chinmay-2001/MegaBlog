@@ -7,10 +7,8 @@ export default function AllPost() {
   useEffect(() => {
     appwriteService.getPosts().then((newposts) => {
       if (newposts) {
-        console.log("newposts:", newposts);
         setPosts(newposts.documents);
       }
-      console.log("post:", posts);
     });
   }, []);
 
